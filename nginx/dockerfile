@@ -1,0 +1,40 @@
+FROM debian:latest
+
+WORKDIR /dir
+
+#RUN apt-get update && \
+   # apt-get install -y \
+  #  curl \
+    #wget \
+   # nginx
+RUN apt-get update 
+RUN apt-get install -y nginx
+RUN /usr/sbin/nginx
+
+#ENTRYPOINT ["/usr/sbin/ngnix"]
+
+COPY . .
+RUN  nginx -c /dir/configfile.conf
+CMD ["nginx","-g", "daemon off;"]
+#CMD ["-g", "daemon off;"]
+#FROM debian:latest
+
+# Set the working directory
+#WORKDIR /dir
+
+# Install required packages
+#RUN apt-get update && \
+    #apt-get install -y \
+   # curl \
+  #  wget \
+ #   nginx
+
+# Copy your custom Nginx configuration file into the container
+#COPY configfile.conf /etc/nginx/nginx.conf
+
+# Correct the ENTRYPOINT for Nginx
+#ENTRYPOINT ["/usr/sbin/nginx"]
+
+# CMD specifies how to run Nginx with your custom configuration
+#CMD ["-g", "daemon off;"]
+
