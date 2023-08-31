@@ -1,21 +1,31 @@
-FROM debian:latest
+FROM debian:bullseye
 
 WORKDIR /dir
 
 #RUN apt-get update && \
    # apt-get install -y \
   #  curl \
-    #wget \
+   #wget \
    # nginx
+
 RUN apt-get update 
 RUN apt-get install -y nginx
-RUN /usr/sbin/nginx
+RUN apt-get install openssl
+# RUN apt-get install --reinstall procps
 
-#ENTRYPOINT ["/usr/sbin/ngnix"]
+# ENTRYPOINT ["/usr/sbin/ngnix"]
 
 COPY . .
-RUN  nginx -c /dir/configfile.conf
-CMD ["nginx","-g", "daemon off;"]
+CMD ["nginx", "-c", "/dir/nginx.conf", "-g", "daemon off;"]
+# RUN nginx
+# RUN nginx -c /dir/nginx.conf
+# RUN openssl genpkey -algorithm RSA -out private.key
+# RUN openssl req -new -key private.key -out csr.pem
+# RUN openssl x509 -req -days 365 -in csr.pem -signkey private.key -out certificate.crt
+
+# COPY certificate.crt /etc/ssl/
+# COPY private.key /etc/ssl/
+
 #CMD ["-g", "daemon off;"]
 #FROM debian:latest
 
