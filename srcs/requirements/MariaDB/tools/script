@@ -1,0 +1,2 @@
+service mysql start
+mariadb -u root -e "CREATE DATABASE <test> ; CREATE USER '<kadjane>'@'%' IDENTIFIED BY '<123>'
