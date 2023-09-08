@@ -9,4 +9,31 @@ exec mysqld_safe
 
 
 
-mariadb -u root -e "CREATE DATABASE <test> ; CREATE USER '<kadjane>'@'%' IDENTIFIED BY '<123>'
+# mariadb -u root -e "CREATE DATABASE <test> ; CREATE USER '<kadjane>'@'%' IDENTIFIED BY '<123>'
+
+
+
+
+# # Start MariaDB
+# service mysql start
+
+# # Create a database if it doesn't exist
+# mysql -u root -p$MYSQL_ROOT_PASSWORD -e "CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\`;"
+
+# # Create a user if it doesn't exist
+# mysql -u root -p$MYSQL_ROOT_PASSWORD -e "CREATE USER IF NOT EXISTS \`$MYSQL_USER\`@'localhost' IDENTIFIED BY '$MYSQL_PASSWORD';"
+
+# # Grant privileges to the user
+# mysql -u root -p$MYSQL_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON \`$MYSQL_DATABASE\`.* TO \`$MYSQL_USER\`@'%' IDENTIFIED BY '$MYSQL_PASSWORD';"
+
+# # Change the root password
+# mysql -u root -p$MYSQL_ROOT_PASSWORD -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';"
+
+# # Flush privileges to apply changes
+# mysql -u root -p$MYSQL_ROOT_PASSWORD -e "FLUSH PRIVILEGES;"
+
+# # Shutdown MariaDB
+# mysqladmin -u root -p$MYSQL_ROOT_PASSWORD shutdown
+
+# # Start MariaDB in safe mode
+# exec mysqld_safe
