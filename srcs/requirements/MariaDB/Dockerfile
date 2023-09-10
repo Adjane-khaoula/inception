@@ -6,7 +6,9 @@ RUN apt-get install -y mariadb-server
 
 COPY ./tools/script ./script
 COPY ./tools/50-server.cnf /etc/mysql/mariadb.conf.d/
-
+# RUN service mariadb start
 RUN chmod +x script
 RUN ./script
 CMD ["mysqld"]
+
+# socket  = /run/mysqld/mysqld.sock
