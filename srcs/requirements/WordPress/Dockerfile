@@ -3,7 +3,7 @@ FROM debian:bullseye
 RUN apt-get update
 RUN apt upgrade -y
 RUN apt-get -y install wget
-RUN apt-get install -y php7.3\
+RUN apt-get install -y php7.4\
     php-fpm\
     php-mysql\
     mariadb-client
@@ -15,14 +15,14 @@ RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
 
 # Copy the modified www.conf from your host to the container
-COPY ./tools/www.conf /etc/php/7.3/fpm/pool.d/
+COPY ./tools/www.conf /etc/php/7.4/fpm/pool.d/
 # COPY www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
 COPY ./tools/script.sh /script.sh
 RUN chmod +x script.sh
 RUN mkdir /run/php/
 ENTRYPOINT ["sh", "script.sh"]
-CMD ["php-fpm7.3", "-R", "-F"]
+CMD ["php-fpm7.4", "-R", "-F"]
 
 # # Modify the configuration file within the container
 # RUN sed -i 's/^;clear_env = no/clear_env = no/' /etc/php/7.4/fpm/pool.d/www.conf
