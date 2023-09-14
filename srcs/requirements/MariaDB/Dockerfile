@@ -8,9 +8,16 @@ COPY ./tools/script ./script
 COPY ./tools/50-server.cnf /etc/mysql/mariadb.conf.d/
 # RUN service mariadb start
 RUN chmod +x script
+
+# ENV MYSQL_DATABASE = "wordpress"
+# ENV MYSQL_USER = "kadjane"
+# ENV MYSQL_PASSWORD = "123"
+# # ENV MYSQL_HOST = "localhost"
+# ENV MYSQL_ROOT_PASSWORD = "12345"
 # RUN ./script
 # ARG MYSQL_ROOT_PASSWORD
 # CMD ["mysqld"]
-CMD ["service", "mariadb", "start", "&&", "sleep", "5", "&&", "./script"]
+CMD ["bash","script"]
+# CMD ["./script"]
 
-# socket  = /run/mysqld/mysqld.sock
+# socket  = /run/mysqld/mysqld.sock 

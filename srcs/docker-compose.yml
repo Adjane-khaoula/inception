@@ -1,8 +1,8 @@
-
 version: "3"
 services:
   nginx:
       container_name: nginx
+      image: nginx:v11
       build: ./requirements/nginx/
       depends_on:
       - wordpress
@@ -17,23 +17,27 @@ services:
 
   mariadb:
       container_name: mariadb
+      image: mariadb:v11
       build: ./requirements/MariaDB/
-      environment:
-      - MYSQL_ROOT_PASSWOR=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      # environment:
+      # - MYSQL_ROOT_PASSWOR=${MYSQL_ROOT_PASSWORD}
+      # - MYSQL_DATABASE=${MYSQL_DATABASE}
+      # - MYSQL_USER=${MYSQL_USER}
+      # - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       volumes:
       - mariadb:/var/lib/mysql/
       env_file:
       - .env
       networks:
       - wordpress
+      ports:
+      - 3306:3306
       restart: always
       init : true
 
   wordpress:
       container_name: wordpress
+      image: wordpress:v11
       build: ./requirements/WordPress
       volumes:
       - wordpress:/var/www/html/wordpress
@@ -43,15 +47,14 @@ services:
       - wordpress
       depends_on:
       - mariadb
-      environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-      - WORDPRESS_DB_HOST=${DOMAIN_NAME}
-      - WORDPRESS_DB_NAME=${TITLE}
-      - WORDPRESS_DB_PASSWORD=${WP_PW}
-      # - WORDPRESS_=${WORDPRESS_TABLE_PREFIX}
+      # environment:
+      # - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      # - MYSQL_DATABASE=${MYSQL_DATABASE}
+      # - MYSQL_USER=${MYSQL_USER}
+      # - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      # - WORDPRESS_DB_HOST=${DOMAIN_NAME}
+      # - WORDPRESS_DB_NAME=${TITLE}
+      # - WORDPRESS_DB_PASSWORD=${WP_PW}
       ports:
       - 9000:9000
       restart: always

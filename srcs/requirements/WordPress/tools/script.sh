@@ -1,12 +1,12 @@
-# mkdir /var/www/
-# mkdir /var/www/html
-# mkdir /var/www/html/wordpress
+# # cd /var/www/html
+# # mkdir /var/www/
+# # mkdir /var/www/html
+# # mkdir /var/www/html/wordpress
 
-# cd /var/www/html
 
-# rm -rf *
-cd /var/www/html/wordpress
+cd /var/www/wordpress
 #Downloading and extracting Wordpress core files to the current directory
+# rm -rf *
 wp core download --allow-root
 # Creating the wp-config.php file using this command.
 wp core config --dbname=${MYSQL_DATABASE} --dbuser=${MYSQL_USER} --dbpass=${MYSQL_PASSWORD} --dbhost=mariadb --allow-root
@@ -14,6 +14,33 @@ wp core config --dbname=${MYSQL_DATABASE} --dbuser=${MYSQL_USER} --dbpass=${MYSQ
 wp core install --url=${DOMAIN_NAME} --title=${TITLE} --admin_user=${WP_USER} --admin_password=${WP_PW} --admin_email=${WP_EMAIL} --allow-root
 exec $@
 
+#!/bin/bash
+
+# Wait for MariaDB to start
+# until mysql -h mariadb -u ${MYSQL_USER} -p${MYSQL_PASSWORD} -e ";" ; do
+#     echo "Waiting for MariaDB to start..."
+#     sleep 2
+# done
+
+# # Change directory to /var/www/wordpress
+# cd /var/www/wordpress
+
+# # Check if WordPress is already installed
+# if [ -e wp-config.php ]; then
+#     echo "WordPress is already installed."
+#     exec "$@"
+# else
+#     # Download and extract WordPress core files
+#     wp core download --allow-root
+
+#     # Generate wp-config.php file
+#     wp core config --dbname=${MYSQL_DATABASE} --dbuser=${MYSQL_USER} --dbpass=${MYSQL_PASSWORD} --dbhost=mariadb --allow-root
+
+#     # Install WordPress
+#     wp core install --url=${DOMAIN_NAME} --title=${TITLE} --admin_user=${WP_USER} --admin_password=${WP_PW} --admin_email=${WP_EMAIL} --allow-root
+
+#     exec "$@"
+# fi
 
 
 
