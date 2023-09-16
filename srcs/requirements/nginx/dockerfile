@@ -8,7 +8,7 @@ RUN apt-get install openssl
 
 COPY . .
 
-EXPOSE 443
+# EXPOSE 443
 
 # RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout myssl.key -out myssl.crt \
 #     -subj "/CN=kadjane.42.fr"
