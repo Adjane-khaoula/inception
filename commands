@@ -2,4 +2,4 @@ docker system prune --all
 apt-get install --reinstall procps
 ps aux | grep nginx
 docker rmi -f `docker images -aq`
-.
+ docker rm -f `docker ps -aq`    

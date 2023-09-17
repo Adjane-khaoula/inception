@@ -3,7 +3,7 @@
 # # cd /var/www/html
 # # mkdir /var/www/
 # # mkdir /var/www/html
-sleep 20
+sleep 10
 
 cd /var/www/html/wordpress
 rm -rf *

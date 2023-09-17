@@ -3,9 +3,9 @@ services:
   nginx:
       container_name: nginx
       image: nginx:V16
-      build: ./requirements/nginx/
       depends_on:
       - wordpress
+      build: ./requirements/nginx/
       networks:
       - wordpress
       ports:
