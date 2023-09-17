@@ -1,16 +1,18 @@
 FROM debian:bullseye
 
-WORKDIR /dir
+# WORKDIR /dir
 
 RUN apt-get update 
 RUN apt-get install -y nginx
 RUN apt-get install openssl
 
 COPY . .
-COPY index.php /var/www/html
+# COPY index.php /var/www/html
 COPY certificate.crt /etc/ssl/
 COPY private.key /etc/ssl/
-CMD ["nginx", "-c", "/dir/nginx.conf", "-g", "daemon off;"]
+
+COPY default.conf /etc/nginx/conf.d/
+CMD ["nginx", "-g", "daemon off;"]
 
 
 # RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout private.key -out certificate.crt \

@@ -1,23 +1,9 @@
 version: "3.7"
 services:
-  nginx:
-      container_name: nginx
-      image: nginx:V16
-      depends_on:
-      - wordpress
-      build: ./requirements/nginx/
-      networks:
-      - wordpress
-      ports:
-      - 443:443
-      env_file:
-      - .env
-      # restart: always
-    #   init : true
 
   mariadb:
       container_name: mariadb
-      image: mariadb:V16
+      # image: mariadb:V16
       build: ./requirements/mariadb/
       volumes:
       - mariadb:/var/lib/mysql/
@@ -32,7 +18,7 @@ services:
 
   wordpress:
       container_name: wordpress
-      image: wordpress:V16
+      # image: wordpress:V16
       build: ./requirements/WordPress
       volumes:
       - wordpress:/var/www/html/wordpress
@@ -44,6 +30,23 @@ services:
       - mariadb
       ports:
       - 9000:9000
+      # restart: always
+    #   init : true
+    
+  nginx:
+      container_name: nginx
+      # image: nginx:V16
+      depends_on:
+      - wordpress
+      build: ./requirements/nginx/
+      volumes:
+      - wordpress:/var/www/html/wordpress
+      networks:
+      - wordpress
+      ports:
+      - 443:443
+      env_file:
+      - .env
       # restart: always
     #   init : true
 networks:
