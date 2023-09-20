@@ -6,7 +6,9 @@ RUN apt-get -y install wget
 RUN apt-get install -y php7.4\
     php-fpm\
     php-mysql\
-    mariadb-client
+    mariadb-client\
+    sendmail
+    
 RUN mkdir -p /var/www/html/wordpress
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x wp-cli.phar

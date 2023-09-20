@@ -3,7 +3,7 @@
 service mariadb start
 sleep 5
 
-echo "***********************************************************"
+# echo "***********************************************************"
 # Create a Database
 
 mysql -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;"

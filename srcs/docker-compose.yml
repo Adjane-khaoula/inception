@@ -52,6 +52,19 @@ services:
 networks:
     wordpress:
       driver: bridge
-volumes :
-    mariadb:
-    wordpress: 
+volumes:
+  mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "/home/kadjane/data/mariadb"
+  wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "/home/kadjane/data/wordpress"
+# volumes :
+#     mariadb:
+#     wordpress: 
