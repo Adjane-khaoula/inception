@@ -1,13 +1,10 @@
 FROM debian:bullseye
 
-# WORKDIR /dir
-
 RUN apt-get update 
 RUN apt-get install -y nginx
 RUN apt-get install openssl
 
-COPY . .
-# COPY index.php /var/www/html
+# COPY . .
 COPY certificate.crt /etc/ssl/
 COPY private.key /etc/ssl/
 
@@ -17,17 +14,3 @@ CMD ["nginx", "-g", "daemon off;"]
 
 # RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout private.key -out certificate.crt \
 #     -subj "/CN=kadjane.42.fr"
-
-
-#RUN apt-get update && \
-   # apt-get install -y \
-  #  curl \
-   #wget \
-   # nginx
-# RUN apt-get install --reinstall procps
-# ENTRYPOINT ["/usr/sbin/ngnix"]
-# RUN ngnix
-# RUN nginx -c /dir/nginx.conf
-# RUN openssl genpkey -algorithm RSA -out private.key
-# RUN openssl req -new -key private.key -out csr.pem
-# RUN openssl x509 -req -days 365 -in csr.pem -signkey private.key -out certificate.crt

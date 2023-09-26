@@ -23,6 +23,3 @@ else
   wp user create $user_name $user_EMAIL --role=author --user_pass=$user_pw --allow-root
   echo "The 'kadjane' user has been created."
 fi
-
-#   wp wp user create $Word_USER $Word_EMAIL --role=author --user_pass=$Word_PW --allow-root
-# Start the PHP-FPM process.
