@@ -12,9 +12,13 @@ clean-volumes:
 clean-images:
 	@docker rmi -f `docker images -aq`
 
-clean: clean-volumes clean-images
+clean-hostv:
+	@sudo rm -r /home/kadjane/data/mariadb/*
+	@sudo rm -r /home/kadjane/data/wordpress/*
 
-fclean: clean
+clean: clean-volumes clean-images 
+
+fclean: clean clean-hostv
 	@docker system prune -f
 
 re: fclean up
